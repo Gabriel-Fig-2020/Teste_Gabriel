@@ -1,0 +1,90 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    {% bootstrap_css %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+<header>
+     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+         <div class="brand">
+             <a class="navbar-brand" href="{% url 'index' %}">
+                 <img class='logo' width="50" src= "{% static 'images/fundo.png' %}" >
+                 <h1>Cursos</h1>
+             </a>
+         </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse  justify-content-end" id="navbarNav">
+
+        <ul class="navbar-nav">
+
+          <li class="nav-item active">
+            <a class="nav-link mx-3" href="{% url 'index' %}">Inicio<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-3" href="{% url 'cursos' %}">Cadastrar novo</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link mx-3" href="{% url 'contato' %}">Contato</a>
+          </li>
+
+        </ul>
+
+
+
+      </div>
+    </nav>
+</header>
+
+    <div class="container">
+        {% if cursos %}
+        <h1 id="titulo">Cursos Disponíveis</h1>
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">CURSO</th>
+                    <th scope="col">PREÇO</th>
+                    <th scope="col">VAGAS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for curso in cursos %}
+                    <tr>
+                        <td scope="row"><a href="#modal{{curso.id}}" data-toggle="modal">{{ curso.nome }}</a></td>
+                        <td scope="row">{{ curso.preco }}</td>
+                        <td scope="row">{{ curso.vagas }}</td>
+                    </tr>
+                    <div class="modal fade bd-example-modal-lg show" id="modal{{curso.id}}" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="dynamic-content">
+                                    <img src="{{ curso.imagem.url }}" class="img-fluid" alt="{{ curso.nome }}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h2>Ainda não existem cursos cadastrados. :(</h2>
+        {% endif %}
+    </div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

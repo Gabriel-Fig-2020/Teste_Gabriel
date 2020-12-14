@@ -1,0 +1,38 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+    background: linear-gradient(50deg, rgba(145,36,115,0.5), rgba(145,36,115,1));
+}
+
+h1{
+    text-align: center;
+}
+
+a{
+    color: #ffffff;
+    }
+
+.container{
+    margin-top: 100px;
+}
+
+.brand{
+    width: 20%;
+    height: 80%;
+    display: inline-block;
+    justify-content: center;
+    align-items:center;
+    display: flex;
+}
+
+.navbar-brand{
+    display: flex;
+    justify-content: space-between;
+}
+
+
